@@ -1,5 +1,5 @@
 === Beautiful taxonomy filters ===
-Contributors: jonathandejong, tigerton
+Contributors: Jonathandejong, tigerton
 Donate link: http://example.com/
 Tags: Taxonomy, filter, permalinks, terms
 Requires at least: 3.0.1
