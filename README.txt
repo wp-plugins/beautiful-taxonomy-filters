@@ -4,7 +4,7 @@ Donate link: http://example.com/
 Tags: Taxonomy, filter, permalinks, terms
 Requires at least: 3.0.1
 Tested up to: 4.0
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,10 @@ Just start tagging up your posts and you’ll see it shows up! Also, make sure t
 
 
 == Changelog ==
+
+= 1.0.2 =
+* FIX: Bug found in displaying the filter info
+* FIX: Bug found in displaying the filter module
 
 = 1.0.1 =
 * FIX: PHP Notice on some occasions using the filter info function

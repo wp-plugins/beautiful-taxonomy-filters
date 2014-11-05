@@ -152,7 +152,7 @@ class Beautiful_Taxonomy_Filters_Public {
 		
 		
 		//base url
-		$new_url = $referer . '/' . $current_post_type . '/';
+		$new_url = $referer . '/' . $current_post_type . '/';	
 		
 		//Get the taxonomies of the current post type
 		$current_taxonomies = get_object_taxonomies($current_post_type, 'objects');

@@ -45,6 +45,18 @@ if(!$current_post_type || $current_post_type == 'page'){
 		}
 	}
 }
+
+//Get the taxonomies of the current post type and the excluded taxonomies
+$excluded_taxonomies = apply_filters( 'beautiful_filters_taxonomies', get_option('beautiful_taxonomy_filters_taxonomies') ); 
+$current_taxonomies = get_object_taxonomies($current_post_type, 'objects');
+//If we both have taxonomies on the post type AND we've set som excluded taxonomies in the plugins settings. Loop through them and unset those we don't want!
+if($current_taxonomies && $excluded_taxonomies){
+	foreach($current_taxonomies as $key => $value){
+		if(in_array($key, $excluded_taxonomies)){
+			unset($current_taxonomies[$key]);
+		}
+	}
+}
 ?>
 <div class="beautiful-taxonomy-filters" id="beautiful-taxonomy-filters-<?php echo $current_post_type; ?>">
 	<?php do_action( 'beautiful_actions_before_form', $current_post_type); //Allow custom markup before form ?>
@@ -52,7 +64,7 @@ if(!$current_post_type || $current_post_type == 'page'){
 		<input type="hidden" name="site-url" value="<?php echo get_bloginfo('url'); ?>" />
 		<input type="hidden" name="post_type" value="<?php echo $current_post_type; ?>" />
 		<?php do_action( 'beautiful_actions_beginning_form', $current_post_type); //allow custom markup at beginning of form ?>
-		<?php 
+		<?php
 		//Loop through the taxonomies and output their terms in a select dropdown 
 		$count = count($current_taxonomies);	
 		?>
