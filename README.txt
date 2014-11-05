@@ -12,7 +12,7 @@ Supercharge your custom post type archives by letting visitors filter posts by t
 
 == Description ==
 
-The Beautiful Taxonomy Filters plugin is a easy and good-looking way to provide your visitors with filtering for your post types. With this you get a complete solution for adding filtering based on taxonomy terms/categories/tags. It will also automatically add rewrite rules for pretty looking filter URLs. It’s completely automatic, works without javascript and is based on the [WordPress Plugin boilerplate](https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate) for a *standardized, organized and object-oriented* codebase. It uses [select2](http://ivaynberg.github.io/select2/) for pretty looking and user-friendly dropdowns but will fall back to ordinary ones if javascript is not supported.
+The Beautiful Taxonomy Filters plugin is an easy and good-looking way to provide your visitors with filtering for your post types. With this you get a complete solution for adding filtering based on taxonomy terms/categories/tags. It will also automatically add rewrite rules for pretty looking filter URLs. It’s completely automatic, works without javascript and is based on the [WordPress Plugin boilerplate](https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate) for a *standardized, organized and object-oriented* codebase. It uses [select2](http://ivaynberg.github.io/select2/) for pretty looking and user-friendly dropdowns but will fall back to ordinary ones if javascript is not supported.
 **No more horrible looking URLs or hacky Javascript solutions**
 
 = Features = 
@@ -74,7 +74,8 @@ Just start tagging up your posts and you’ll see it shows up! Also, make sure t
 == Changelog ==
 
 = 1.0.1 =
-* FIX: PHP Notice on some occasions using 
+* FIX: PHP Notice on some occasions using the filter info function
+* FEATURE: Spanish translation. Thanks to Juan Javier Moreno Restituto
 
 = 1.0 =
 * Initial public version
