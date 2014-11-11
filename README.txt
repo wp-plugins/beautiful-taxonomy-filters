@@ -4,7 +4,7 @@ Donate link: http://example.com/
 Tags: Taxonomy, filter, permalinks, terms
 Requires at least: 3.0.1
 Tested up to: 4.0
-Stable tag: 1.0.2
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,8 @@ The Beautiful Taxonomy Filters plugin is an easy and good-looking way to provide
 * English
 * Swedish
 * Spanish (Thanks to Juan Javier Moreno Restituto)
+* Dutch (Thanks to Piet Bos)
+* French (Thanks to [Brice Capobianco](https://profiles.wordpress.org/brikou))
 ____
 Do you want to translate this plugin to another language? I recommend using POEdit (http://poedit.net/) or if you prefer to do it straight from the WordPress admin interface (https://wordpress.org/plugins/loco-translate/). When you’re done, send us the file(s) to jonathan@tigerton.se and we’ll add it to the official plugin!
 
@@ -69,13 +71,36 @@ Just start tagging up your posts and you’ll see it shows up! Also, make sure t
 == Screenshots ==
 
 1. Basic setup settings for the plugin.
-2. Styling settings for both the included filter module and info module.
-3. Example of a beautified permalink structure.
-4. The filter module with the "light material" style.
-5. The filter module in work with select2 for user friendly dropdowns.
+2. Filter module settings.
+3. Style settings for the modules.
+4. The filter info widget.
+5. The filter widget.
+6. The filter module with the "light material" style.
+7. The filter module in work with select2 for user friendly dropdowns.
+8. Example of a beautified permalink structure.
 
 
 == Changelog ==
+
+= 1.1.0 =
+* FEATURE: Brand new beautiful widget. You can now add the filter module directly to your sidebar areas via a custom widget. 
+  * Ability to override the main settings for granular control over each widget. 
+  * Select a specific posttype and the filter will work from anywhere (redirecting to the proper filtered archive url). 
+* FEATURE: But wait.. there's more! You get another beautiful widget for displaying the active filter info. Oh and the widget wont even appear where it's not supposed to. So no need to micromanage it's visibility!
+* FEATURE: New option to show or hide empty terms in dropdowns
+* FEATURE: New option to show post count next to terms in dropdowns
+* FEATURE: Dutch translation. Thanks to [Piet Bos](http://senlinonline.com/)
+* FEATURE: French translation. Thanks to [Brice Capobianco](https://profiles.wordpress.org/brikou)
+* FEATURE: Added filter to set the option to show/hide empty terms
+* FEATURE: Added filters to set order and orderby in the dropdown arguments (if you for some reason want to display the terms z-a… for example)
+* FEATURE: Added filter to change the "Active filters" heading
+* STYLE: Added styling for displaying hierarchical terms in dropdowns (down to 2 levels)
+* STYLE: Some minor touch ups on both styles
+* FIX: Added taxonomy specific ids to each dropdown wrapper to allow for more in-depth custom styling per dropdown.
+* FIX: Added current post type to the filters beautiful_filters_clear_all and beautiful_filters_hide_empty to allow for posttype specific settings.
+* FIX: Changed behaviour of the current filter info module to always be visible and show "all <taxonomy>" if no term is active. 
+* IMPROVEMENT: Abstracted some functionality for cleaner leaner meaner code
+
 
 = 1.0.2 =
 * FIX: Bug found in displaying the filter info
@@ -135,14 +160,66 @@ add_filter( 'beautiful_filters_taxonomies', 'modify_categories_dropdown', 10, 1 
 
 = beautiful_filters_clear_all =
 
-$bool is a boolean which decides if the ”Clear all” link should be used or not. 
+$bool is a boolean which decides if the ”Clear all” link should be used or not. $current_post_type is the current post type being filtered
 
 `
-function modify_clear_all( $bool ) {
+function modify_clear_all( $bool, $current_post_type ) {
+	
+	//Only add the clear all link to a specific posttype
+	if($current_post_type == 'movies'){
+		$bool = true;
+	}
+    return $bool;
+}
+add_filter( 'beautiful_filters_clear_all', 'modify_clear_all', 10, 2 );
+`
+
+= beautiful_filters_hide_empty =
+
+$bool is a boolean which decides if empty terms should be displayed or not. $current_post_type is the current post type being filtered
+
+`
+function modify_hide_empty( $bool, $current_post_type ) {
 
     return $bool;
 }
-add_filter( 'beautiful_filters_clear_all', 'modify_clear_all', 10, 1 );
+add_filter( 'beautiful_filters_show_empty', 'modify_hide_empty', 10, 2 );
+`
+
+= beautiful_filters_show_count =
+
+$bool is a boolean which decides if post count should be displayed or not. $current_post_type is the current post type being filtered
+
+`
+function modify_show_count( $bool, $current_post_type ) {
+
+    return $bool;
+}
+add_filter( 'beautiful_filters_show_empty', 'modify_show_count', 10, 2 );
+`
+
+= beautiful_filters_dropdown_order =
+
+$order is a string which defaults to ASC, other possible value is DESC. $taxonomy is the current taxonomy slug
+
+`
+function modify_dropdown_order( $order, $taxonomy) {
+
+    return $order;
+}
+add_filter( 'beautiful_filters_dropdown_order', 'modify_dropdown_order', 10, 2 );
+`
+
+= beautiful_filters_dropdown_orderby =
+
+$order is a string which defaults to NAME, other possible value is ID or SLUG. $taxonomy is the current taxonomy slug
+
+`
+function modify_dropdown_orderby( $orderby, $taxonomy) {
+
+    return $orderby;
+}
+add_filter( 'beautiful_filters_dropdown_orderby', 'modify_dropdown_orderby', 10, 2 );
 `
 
 = beautiful_filters_taxonomy_label =
@@ -185,6 +262,21 @@ function modify_active_taxonomy($terms, $taxonomy){
 
 add_filter('beautiful_filters_active_terms', 'modify_active_terms', 10, 2);
 `
+
+= beautiful_filters_info_heading =
+
+$filter_heading is the default heading string
+
+`
+function modify_filter_heading($filter_heading){
+	
+	$filter_heading = 'Hej världen';
+	return $filter_heading;
+	
+}
+add_filter('beautiful_filters_info_heading', 'modify_filter_heading');
+`
+
 
 = **Actions** =
 These are the actions you may use to extend the filter component.
