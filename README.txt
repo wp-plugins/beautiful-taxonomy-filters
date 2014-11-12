@@ -16,13 +16,15 @@ The Beautiful Taxonomy Filters plugin is an easy and good-looking way to provide
 **No more horrible looking URLs or hacky Javascript solutions**
 
 = Features = 
-* Activate filtering on any registered public custom posttype
-* Exclude taxonomies you just don’t want the visitors to filter on
+* Activate filtering on any registered public custom post type.
+* Exclude taxonomies you just don’t want the visitors to filter on.
 * Beautifies the resulting URLs. You won’t see any /posttype/?taxonomy1=term. Instead you’ll see /posttype/taxonomy/term
-* Comes with a complete functional filter component for you to put in your theme. 
-* Choose from different styles for the component, or disable styling and do it yourself in style.css! Just want to tweak a style? Add your custom CSS directly on the settings page
+* Comes with a complete functional filter module for you to put in your theme. 
+* Use either the widgets or functions to add the filter module and it's friend the filterinfo module to your site.
+* Choose from different styles for the component, or disable styling and do it yourself in style.css! Just want to tweak a style? Add your custom CSS directly on the settings page.
 * Want a ”Clear all” link for the filter component? Just tick a box in the settings page!
-* Ability to show your visitors information about their current active filtering
+* Settings for fine-tuning the filter modules behaviour.
+* Ability to show your visitors information about their current active filtering.
 * Allows for custom GET parameters to be included. Extend the filter your way with maybe a custom search-parameter or whatever you like. 
 * Many [filters and actions](https://wordpress.org/plugins/beautiful-taxonomy-filters/other_notes/) for modifying the plugins behavior. For those controlfreaks out there…
 
@@ -63,8 +65,8 @@ No. In a future release we will look into if it’s possible to support this AND
 A Taxonomy will not appear in the filter until at least one post has been connected to one of the terms.
 Just start tagging up your posts and you’ll see it shows up! Also, make sure that your custom post type has an archive (in the arguments for the custom post type) since this plugin uses the builtin WordPress functionality for archives.
 
-= Why aren't the builtin posttypes supported? =
-**Posts** are not supported because we haven't been able to create proper rewrite rules for the multiple filtering to work. Posts are handled differently by WordPress than other custom posttypes (you have probably noticed that there's no /posts/ in the permalink for example). Due to this the same rewrite rules that works for custom posttypes doesn't work for posts. If you're just looking to filter your posts by their categories with a dropdown you can use this function [wp_dropdown_categories](http://codex.wordpress.org/Function_Reference/wp_dropdown_categories). It's good practice to use a custom posttype when you're not going to use it as news/blog -posts so perhaps you should create a Custom posttype instead and make use of this beautiful plugin!
+= Why aren't the builtin post types supported? =
+**Posts** are not supported because we haven't been able to create proper rewrite rules for the multiple filtering to work. Posts are handled differently by WordPress than other custom post types (you have probably noticed that there's no /posts/ in the permalink for example). Due to this the same rewrite rules that works for custom post types doesn't work for posts. If you're just looking to filter your posts by their categories with a dropdown you can use this function [wp_dropdown_categories](http://codex.wordpress.org/Function_Reference/wp_dropdown_categories). It's good practice to use a custom post type when you're not going to use it as news/blog -posts so perhaps you should create a Custom post type instead and make use of this beautiful plugin!
 
 
 
