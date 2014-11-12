@@ -80,6 +80,7 @@ Just start tagging up your posts and you’ll see it shows up! Also, make sure t
 6. The filter module with the "light material" style.
 7. The filter module in work with select2 for user friendly dropdowns.
 8. Example of a beautified permalink structure.
+9. The widgets on the twentyfourteen theme.
 
 
 == Changelog ==
