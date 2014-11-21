@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Beautiful taxonomy filter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-10 09:35+0800\n"
-"PO-Revision-Date: Wed Nov 12 2014 00:54:49 GMT+0100 (CET)\n"
+"PO-Revision-Date: Fri Nov 21 2014 10:48:16 GMT+0100 (CET)\n"
 "Last-Translator: admin <admin@local.dev>\n"
 "Language-Team: \n"
 "Language: Swedish\n"
@@ -55,14 +55,22 @@ msgid "Show post count next to term name:"
 msgstr "Visa antal inlägg bredvid kategorins namn:"
 
 #: ../admin/class-beautiful-taxonomy-filters-admin.php:194
+msgid "Dropdown deselect/default behaviour:"
+msgstr "Rullgardinernas avmarkering/default beteende:"
+
+#: ../admin/class-beautiful-taxonomy-filters-admin.php:203
+msgid "Automagically insert the modules in the archives:"
+msgstr "Lägg in modulerna i arkivsidorna automatiskt:"
+
+#: ../admin/class-beautiful-taxonomy-filters-admin.php:212
 msgid "Disable the active filters heading:"
 msgstr "Inaktivera rubriken ovanför informationen om aktiva filter:"
 
-#: ../admin/class-beautiful-taxonomy-filters-admin.php:203
+#: ../admin/class-beautiful-taxonomy-filters-admin.php:221
 msgid "Styling:"
 msgstr "Stil:"
 
-#: ../admin/class-beautiful-taxonomy-filters-admin.php:212
+#: ../admin/class-beautiful-taxonomy-filters-admin.php:230
 msgid "Custom CSS Styling:"
 msgstr "Skräddarsydd CSS"
 
@@ -105,8 +113,12 @@ msgid ""
 msgstr "<i>Gratulerar! Dina före detta fula filter är nu ack så vackra!</i>"
 
 #: ../admin/partials/beautiful-taxonomy-filters-admin-display.php:40
-msgid "To use the dropdown filter module you can either use the widgets or copy:"
-msgstr "För att använda filtermodulen kan du antingen använda widgets eller kopiera:"
+msgid ""
+"To use the dropdown filter module you can either use the widgets, automagic "
+"feature or copy:"
+msgstr ""
+"För att använda filtermodulen kan du antingen använda widgets, automatiska "
+"funktionen eller kopiera:"
 
 #: ../admin/partials/beautiful-taxonomy-filters-admin-display.php:40
 msgid "and paste it in your"
@@ -129,12 +141,56 @@ msgstr ""
 "egna supportforum ni kan vända er till. Lycka till!"
 
 #: ../admin/partials/beautiful-taxonomy-filters-admin-display.php:44
-msgid "To show the active filter info either use the widgets or copy:"
-msgstr "För att visa aktivt filterinfo, använd widgets eller kopiera:"
+msgid ""
+"To show the active filter info either use the widgets, automagic feature or "
+"copy:"
+msgstr ""
+"För att använda filterinfo-modulen kan du antingen använda widgets, "
+"automatiska funktionen eller kopiera:"
 
 #: ../admin/partials/beautiful-taxonomy-filters-admin-display.php:44
 msgid "to wherever you want the filter info to appear."
 msgstr "till var du vill att informationen ska synas."
+
+#: ../admin/partials/beautiful-taxonomy-filters-automagic-settings-display.php:17
+msgid ""
+"Experimental feature. Attempts to automagically insert the modules in your "
+"archive. If the placement isn't what you want you'll have to use one of the "
+"other methods."
+msgstr ""
+"Experimentell funktion. Lägger automatiskt in modulerna i dina arkiv-sidor. "
+"Om placeringen av modulerna inte blir som ni önskar måste ni använda någon "
+"av de andra metoderna."
+
+#: ../admin/partials/beautiful-taxonomy-filters-automagic-settings-display.php:20
+msgid "Filter module"
+msgstr "Filtermodulen"
+
+#: ../admin/partials/beautiful-taxonomy-filters-automagic-settings-display.php:24
+msgid "Filter info module"
+msgstr "Filterinfo-modulen"
+
+#: ../admin/partials/beautiful-taxonomy-filters-automagic-settings-display.php:27
+msgid "Location of the filter info module"
+msgstr "Placering av filterinfo-modulen"
+
+#: ../admin/partials/beautiful-taxonomy-filters-automagic-settings-display.php:30
+msgid "Above the filter module"
+msgstr "Ovanför filtermodulen"
+
+#: ../admin/partials/beautiful-taxonomy-filters-automagic-settings-display.php:31
+msgid "Below the filter module"
+msgstr "Under filtermodulen"
+
+#: ../admin/partials/beautiful-taxonomy-filters-dropdown-behaviour-settings-
+#: display.php:17
+msgid "All option"
+msgstr "\"Alla\" alternativet"
+
+#: ../admin/partials/beautiful-taxonomy-filters-dropdown-behaviour-settings-
+#: display.php:20
+msgid "Placeholder"
+msgstr "Platshållare"
 
 #: ../admin/partials/beautiful-taxonomy-filters-module-section-display.php:15
 msgid "Functionality of the filter module. These are optional settings."
@@ -148,22 +204,24 @@ msgstr ""
 "Här kan du styra utseendet och innehållet i filterkomponenten du använder i "
 "dina posttyp-arkiv."
 
-#: ../public/partials/beautiful-taxonomy-filters-public-display.php:74 ..
+#: ../public/partials/beautiful-taxonomy-filters-public-display.php:77 ..
+#: public/partials/beautiful-taxonomy-filters-public-display.php:90 ..
+#: public/partials/beautiful-taxonomy-filters-public-display.php:102 ..
 #: widgets/beautiful-taxonomy-filters-widget.php:208
 msgid "All "
 msgstr "Alla "
 
-#: ../public/partials/beautiful-taxonomy-filters-public-display.php:94 ..
+#: ../public/partials/beautiful-taxonomy-filters-public-display.php:110 ..
 #: widgets/beautiful-taxonomy-filters-widget.php:228
 msgid "Apply filter"
 msgstr "Filtrera"
 
-#: ../public/partials/beautiful-taxonomy-filters-public-display.php:96 ..
+#: ../public/partials/beautiful-taxonomy-filters-public-display.php:112 ..
 #: widgets/beautiful-taxonomy-filters-widget.php:230
 msgid "Click to clear all active filters"
 msgstr "Klicka för att rensa alla aktiva filter"
 
-#: ../public/partials/beautiful-taxonomy-filters-public-display.php:96 ..
+#: ../public/partials/beautiful-taxonomy-filters-public-display.php:112 ..
 #: widgets/beautiful-taxonomy-filters-widget.php:230
 msgid "Clear all"
 msgstr "Rensa alla"
@@ -174,8 +232,8 @@ msgstr "Aktiva filter"
 
 #: ../public/partials/beautiful-taxonomy-filters-public-info-display.php:73 ..
 #: public/partials/beautiful-taxonomy-filters-public-info-display.php:101 ..
-#: widgets/beautiful-taxonomy-filters-info-widget.php:120 ../widgets/beautiful-
-#: taxonomy-filters-info-widget.php:148
+#: widgets/beautiful-taxonomy-filters-info-widget.php:125 ../widgets/beautiful-
+#: taxonomy-filters-info-widget.php:153
 msgid "All"
 msgstr "Alla"
 
