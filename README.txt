@@ -2,7 +2,7 @@
 Contributors: Jonathandejong, tigerton
 Tags: Taxonomy, filter, permalinks, terms
 Requires at least: 3.0.1
-Tested up to: 4.0.1
+Tested up to: 4.1
 Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -42,6 +42,8 @@ Do you want to translate this plugin to another language? I recommend using POEd
 * Based on [WordPress Plugin Boilerplate](https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate)
 * Uses [Select2](http://ivaynberg.github.io/select2/) to enhance dropdowns 
 
+= Featured on =
+[WP Tavern](http://www.wptavern.com/beautiful-taxonomy-filters-for-wordpress-custom-post-types)
 
 == Installation ==
 
