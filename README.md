@@ -1,6 +1,6 @@
 === Beautiful taxonomy filters ===
 Contributors: Jonathandejong, tigerton
-Tags: Taxonomy, filter, permalinks, terms
+Tags: Taxonomy, taxonomies, filter, filtering, permalinks, terms, term, widget, pretty permalinks, rewrite, custom posttype, cpt, beautiful, select2, dropdowns, material design, GET
 Requires at least: 3.0.1
 Tested up to: 4.1
 Stable tag: 1.1.2
