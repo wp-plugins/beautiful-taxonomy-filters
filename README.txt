@@ -44,6 +44,8 @@ Do you want to translate this plugin to another language? I recommend using POEd
 
 = Featured on =
 [WP Tavern](http://www.wptavern.com/beautiful-taxonomy-filters-for-wordpress-custom-post-types)
+[RiverTheme](http://www.rivertheme.com/top-22-free-wordpress-plugins-of-december-2014/)
+[The WhiP (WPMU DEV)](http://premium.wpmudev.org/blog/this-week-in-wordpress-5/)
 
 
 == Installation ==
@@ -51,6 +53,7 @@ Do you want to translate this plugin to another language? I recommend using POEd
 1. Upload `beautiful-taxonomy-filters` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Follow the instructions found in Settings > Taxonomy filters to get you started!
+4. For more customization have a look at the [filters and actions](https://wordpress.org/plugins/beautiful-taxonomy-filters/other_notes/)
 
 
 == Frequently Asked Questions ==
