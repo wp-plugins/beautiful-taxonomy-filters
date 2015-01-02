@@ -43,9 +43,9 @@ Do you want to translate this plugin to another language? I recommend using POEd
 * Uses [Select2](http://ivaynberg.github.io/select2/) to enhance dropdowns 
 
 = Featured on =
-[WP Tavern](http://www.wptavern.com/beautiful-taxonomy-filters-for-wordpress-custom-post-types)
-[RiverTheme](http://www.rivertheme.com/top-22-free-wordpress-plugins-of-december-2014/)
-[The WhiP (WPMU DEV)](http://premium.wpmudev.org/blog/this-week-in-wordpress-5/)
+* [WP Tavern](http://www.wptavern.com/beautiful-taxonomy-filters-for-wordpress-custom-post-types)
+* [RiverTheme](http://www.rivertheme.com/top-22-free-wordpress-plugins-of-december-2014/)
+* [The WhiP (WPMU DEV)](http://premium.wpmudev.org/blog/this-week-in-wordpress-5/)
 
 
 == Installation ==
