@@ -24,7 +24,6 @@ The Beautiful Taxonomy Filters plugin is an easy and good-looking way to provide
   * Functions (for granular control)
   * Automagic setting which will magically place the modules in your archive from thin air. Wizards at work…
 * Choose from different styles for the component, or disable styling and do it yourself in style.css! Just want to tweak a style? Add your custom CSS directly on the settings page.
-* 
 * Many more settings for fine-tuning the filter modules behaviour:
   * A ”Clear all” link for the filter component.
   * Choose between placeholders or "show all" in the dropdowns.
