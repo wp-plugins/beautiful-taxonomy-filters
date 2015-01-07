@@ -19,11 +19,18 @@ The Beautiful Taxonomy Filters plugin is an easy and good-looking way to provide
 * Exclude taxonomies you just don’t want the visitors to filter on.
 * Beautifies the resulting URLs. You won’t see any /posttype/?taxonomy1=term. Instead you’ll see /posttype/taxonomy/term
 * Comes with a complete functional filter module for you to put in your theme. 
-* Use either the widgets or functions to add the filter module and it's friend the filterinfo module to your site.
-* Or use the automagic setting to have the modules appear on your archive from thin air. Wizards at work… 
+* Three alternatives for putting the filter modules in your theme:
+  * Widgets (Also lets you "hard set" a post type for use anywhere)
+  * Functions (for granular control)
+  * Automagic setting which will magically place the modules in your archive from thin air. Wizards at work…
 * Choose from different styles for the component, or disable styling and do it yourself in style.css! Just want to tweak a style? Add your custom CSS directly on the settings page.
-* Want a ”Clear all” link for the filter component? Just tick a box in the settings page!
-* Many settings for fine-tuning the filter modules behaviour.
+* 
+* Many more settings for fine-tuning the filter modules behaviour:
+  * A ”Clear all” link for the filter component.
+  * Choose between placeholders or "show all" in the dropdowns.
+  * Hide empty terms in the dropdowns.
+  * Show a post count next to the term name
+  * More to come!
 * Ability to show your visitors information about their current active filtering.
 * Allows for custom GET parameters to be included. Extend the filter your way with maybe a custom search-parameter or whatever you like. 
 * Many [filters and actions](https://wordpress.org/plugins/beautiful-taxonomy-filters/other_notes/) for modifying the plugins behaviour. For you control freaks out there…
@@ -49,6 +56,7 @@ Do you want to translate this plugin to another language? I recommend using POEd
 
 
 == Installation ==
+
 1. Upload `beautiful-taxonomy-filters` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Follow the instructions found in Settings > Taxonomy filters to get you started!
@@ -73,6 +81,36 @@ Just start tagging up your posts and you’ll see it shows up! Also, make sure t
 = Why aren't the builtin post types supported? =
 **Posts** are not supported because we haven't been able to create proper rewrite rules for the multiple filtering to work. Posts are handled differently by WordPress than other custom post types (you have probably noticed that there's no /posts/ in the permalink for example). Due to this the same rewrite rules that works for custom post types doesn't work for posts. If you're just looking to filter your posts by their categories with a dropdown you can use this function [wp_dropdown_categories](http://codex.wordpress.org/Function_Reference/wp_dropdown_categories). It's good practice to use a custom post type when you're not going to use it as news/blog -posts so perhaps you should create a Custom post type instead and make use of this beautiful plugin!
 
+= Is it compatible with XXXXXX? =
+You will be able to use this plugin with any **public registered custom post type** regardless if it's been created by yourself or a plugin. **However** the displaying of the CPT must be via it's archive template. That means that a plugin that uses shortcodes to display the entire post listing on a static page will not work out of the box. It will also not work out of the box with plugins that in some way alter the permalink to the CPT archive [WPMU Devs Events+ for example](https://premium.wpmudev.org/project/events-plus/).
+
+= But I'm using Events+ and I really want this! =
+You can make Events+ compatible with BTF by adding this snippet to your themes functions.php file. Note that you'll have to change the "events" string if you've set a different one in the Events+ settings.
+
+`
+function curPageURL() {
+ $pageURL = 'http';
+ if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+ $pageURL .= "://";
+ if ($_SERVER["SERVER_PORT"] != "80") {
+  $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+ } else {
+  $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+ }
+ return $pageURL;
+}
+
+add_action( 'template_redirect', 'template_redirect_cb' );
+function template_redirect_cb() {
+	$url = curPageURL();
+	if ( strpos( $url,'eab_events_category' ) !== false ) {
+		$u = str_replace( "eab_events_category/", "", $url );
+		$u = str_replace( "events/", "blog/events/", $u );
+		wp_redirect( $u );
+	}
+}
+`
+[See here for more info](http://premium.wpmudev.org/forums/topic/i-would-change-the-sidebar-on-the-events-page-i-created)
 
 
 == Screenshots ==
@@ -89,10 +127,6 @@ Just start tagging up your posts and you’ll see it shows up! Also, make sure t
 
 
 == Changelog ==
-
-= 1.1.2 =
-* IMPROVEMENT: The widget now also has the setting for the dropdown behaviour.
-* FIX: Fixed some php warnings.
 
 = 1.1.1 =
 * FEATURE: You can now automagically insert the two modules into your archive pages! No need for modification of your theme. This feature is sort of experimental and there's a few things to note compared to the manual methods: 
