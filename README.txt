@@ -327,6 +327,19 @@ function modify_labels($label){
 add_filter('beautiful_filters_taxonomy_label', 'modify_labels', 10, 1);
 `
 
+= beautiful_filters_apply_button =
+
+$string is the default string of the apply filters button. 
+
+`
+function modify_filter_button($string){
+	
+	return 'Hej världen';
+}
+
+add_filter('beautiful_filters_apply_button', 'modify_filter_button', 10, 1);
+`
+
 = beautiful_filters_active_taxonomy =
 
 $label is the taxonomy string for the active filter info

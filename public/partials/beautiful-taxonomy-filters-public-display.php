@@ -113,7 +113,7 @@ if($current_taxonomies && $excluded_taxonomies){
 				<?php endif; ?>
 			<?php endforeach; ?>
 		</div>
-		<button type="submit" class="beautiful-taxonomy-filters-button"><?php _e('Apply filter', 'beautiful-taxonomy-filters'); ?></button>
+		<button type="submit" class="beautiful-taxonomy-filters-button"><?php echo apply_filters( 'beautiful_filters_apply_button', __('Apply filter', 'beautiful-taxonomy-filters') ); ?></button>
 		<?php if($show_clear_all): ?>
 			<a href="<?php echo get_site_url() . '/' . $current_post_type_rewrite; ?>" class="beautiful-taxonomy-filters-clear-all" title="<?php _e('Click to clear all active filters', 'beautiful-taxonomy-filters'); ?>"><?php _e('Clear all', 'beautiful-taxonomy-filters'); ?></a>
 		<?php endif; ?>
