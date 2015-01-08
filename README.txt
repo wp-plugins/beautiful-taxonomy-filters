@@ -3,7 +3,7 @@ Contributors: Jonathandejong, tigerton
 Tags: Taxonomy, taxonomies, filter, filtering, permalinks, terms, term, widget, pretty permalinks, rewrite, custom posttype, cpt, beautiful, select2, dropdowns, material design, GET
 Requires at least: 3.0.1
 Tested up to: 4.1
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,7 +30,7 @@ The Beautiful Taxonomy Filters plugin is an easy and good-looking way to provide
   * Hide empty terms in the dropdowns.
   * Show a post count next to the term name
   * More to come!
-* Ability to show your visitors information about their current active filtering.
+* Ability to show your visitors information about their current active filtering and control the look of this.
 * Allows for custom GET parameters to be included. Extend the filter your way with maybe a custom search-parameter or whatever you like. 
 * Many [filters and actions](https://wordpress.org/plugins/beautiful-taxonomy-filters/other_notes/) for modifying the plugins behaviour. For you control freaks out there…
 
@@ -127,6 +127,14 @@ function template_redirect_cb() {
 
 == Changelog ==
 
+= 1.1.3 = 
+* FEATURE: The filterinfo module now has the ability to show how many posts a filter has resulted in. There is also new filters for hooking into this. 
+* FEATURE: New actions have been added to the filterinfo module that allows for custom markup inside the module. 
+* FEATURE: There is now a filter for modifying the placeholder of each dropdown.
+* FEATURE: There is now a filter for modifying the filter buttons text "Apply filter". 
+* IMPROVEMENT: The plugins scripts will now load in footer instead of head. This also fixes some rare bugs where dependencies with jQuery did not work. 
+* IMPROVEMENT: Update to swedish translation.
+
 = 1.1.1 =
 * FEATURE: You can now automagically insert the two modules into your archive pages! No need for modification of your theme. This feature is sort of experimental and there's a few things to note compared to the manual methods: 
   * The modules wont appear if your users select a filtering and there's no posts.
@@ -213,6 +221,20 @@ function modify_categories_dropdown( $taxonomies ) {
     return $taxonomies;
 }
 add_filter( 'beautiful_filters_taxonomies', 'modify_categories_dropdown', 10, 1 );
+`
+
+= beautiful_filters_dropdown_placeholder =
+
+$placeholder is the string used for the placeholder. 
+$taxonomy is the current taxonomy.
+In order to change the placeholders you must use this filter rather than the *modify_categories_dropdown* argument "show_option_all". 
+
+`
+function modify_categories_dropdown( $placeholder, $taxonomy ) {
+
+    return 'New placeholder';
+}
+add_filter( 'beautiful_filters_dropdown_placeholder', 'modify_dropdown_placeholder', 10, 2 );
 `
 
 = beautiful_filters_clear_all =
@@ -333,6 +355,19 @@ function modify_active_taxonomy($terms, $taxonomy){
 add_filter('beautiful_filters_active_terms', 'modify_active_terms', 10, 2);
 `
 
+= beautiful_filters_disable_heading =
+
+$bool is a boolean of either true (hide filterinfo heading) or false (show filterinfo heading)
+
+`
+function toggle_filterinfo_heading($bool){
+	
+	return true;
+	
+}
+add_filter('beautiful_filters_disable_heading', 'toggle_filterinfo_heading');
+`
+
 = beautiful_filters_info_heading =
 
 $filter_heading is the default heading string
@@ -345,6 +380,33 @@ function modify_filter_heading($filter_heading){
 	
 }
 add_filter('beautiful_filters_info_heading', 'modify_filter_heading');
+`
+
+= beautiful_filters_disable_postcount =
+
+$bool is a boolean of either true (hide filterinfo postcount) or false (show filterinfo postcount)
+
+`
+function toggle_filterinfo_postcount($bool){
+	
+	return true;
+	
+}
+add_filter('beautiful_filters_disable_postcount', 'toggle_filterinfo_postcount');
+`
+
+
+= beautiful_filters_info_postcount =
+
+$postcount_paragraph is the default postcount string. You MUST add %d somewhere in the new string in order for the resulting number to appear.
+
+`
+function modify_filterinfo_postcount($postcount_paragraph){
+	
+	return 'Hej världen ';
+	
+}
+add_filter('beautiful_filters_info_postcount', 'modify_filterinfo_postcount');
 `
 
 
@@ -404,3 +466,32 @@ function add_markup_ending_form($current_post_type){
 
 add_action('beautiful_actions_ending_form', 'add_markup_ending_form' );
 `
+
+= beautiful_actions_beginning_filterinfo =
+
+$current_post_type is the post type which the filterinfo component are currently using. Use this variable as a conditional if needed.
+This action is very usable if you for some reason need to add markup at the beginning of the filterinfo module
+
+`
+function add_markup_beginning_filterinfo($current_post_type){
+	
+	echo 'Hej världen';
+}
+
+add_action('beautiful_actions_beginning_filterinfo', 'add_markup_beginning_filterinfo' );
+`
+
+= beautiful_actions_ending_filterinfo =
+
+$current_post_type is the post type which the filterinfo component are currently using. Use this variable as a conditional if needed.
+This action is very usable if you for some reason need to add markup at the end of the filterinfo module
+
+`
+function add_markup_ending_filterinfo($current_post_type){
+	
+	echo 'Hej världen';
+}
+
+add_action('beautiful_actions_ending_filterinfo', 'add_markup_ending_filterinfo' );
+`
+

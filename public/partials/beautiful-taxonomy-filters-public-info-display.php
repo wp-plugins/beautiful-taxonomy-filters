@@ -20,6 +20,7 @@
 ?>
 <?php 
 $hide_heading = apply_filters( 'beautiful_filters_disable_heading', get_option('beautiful_taxonomy_filters_disable_heading') );
+$hide_postcount = apply_filters( 'beautiful_filters_disable_postcount', get_option('beautiful_taxonomy_filters_disable_postcount') );
 global $wp_query;
 $taxonomies = $wp_query->tax_query->queries;
 $activated_post_types = apply_filters( 'beautiful_filters_post_types', get_option('beautiful_taxonomy_filters_post_types') );
@@ -31,8 +32,13 @@ if(!$current_post_type || !in_array($current_post_type, $activated_post_types)){
 }
 ?>
 <div class="beautiful-taxonomy-filters-active-filter">
+	<?php do_action( 'beautiful_actions_beginning_filterinfo', $current_post_type); //Allow custom markup before filter info ?>
 	<?php if(!$hide_heading): ?>
 		<h3 class="beautiful-taxonomy-filters-info-heading"><?php echo apply_filters( 'beautiful_filters_info_heading', __('Active filters', 'beautiful-taxonomy-filters') ); ?></h3>
+	<?php endif; ?>
+	<?php if(!$hide_postcount): ?>
+		<p class="beautiful-taxonomy-filters-postcount"><?php echo apply_filters( 'beautiful_filters_info_postcount', sprintf( __( 'Result of filter: %d', 'beautiful-taxonomy-filters' ), $wp_query->post_count ) ); ?></p>
+		
 	<?php endif; ?>
 	<?php if($taxonomies): ?>
 		<?php $posttype_taxonomies = get_object_taxonomies($current_post_type, 'objects');  ?>
@@ -108,4 +114,5 @@ if(!$current_post_type || !in_array($current_post_type, $activated_post_types)){
 		<?php endif; ?>
 	
 	<?php endif; ?>
+	<?php do_action( 'beautiful_actions_ending_filterinfo', $current_post_type); //Allow custom markup before filter info ?>
 </div>

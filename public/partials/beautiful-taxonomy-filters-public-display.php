@@ -86,20 +86,26 @@ if($current_taxonomies && $excluded_taxonomies){
 							'class'			=> 'beautiful-taxonomy-filters-select',
 							'walker'        => new Walker_Slug_Value_Category_Dropdown
 						);
-						if(!$dropdown_behaviour || $dropdown_behaviour == 'show_all_option'){
-							$dropdown_args['show_option_all'] = __('All ', 'beautiful-taxonomy-filters') . $taxonomy->labels->name;
-						}else{
-							$dropdown_args['show_option_all'] = ' ';
-						}
 						//Apply filter on the arguments to let users modify them first!
 						$dropdown_args = apply_filters( 'beautiful_filters_dropdown_categories', $dropdown_args, $taxonomy->name );
+						
+						//But if they've selected placeholder we cant use the show_option_all
+						if($dropdown_behaviour == 'show_placeholder_option'){
+							$dropdown_args['show_option_all'] = ' ';
+						}
+						
+						//create the dropdown
 						$filterdropdown = wp_dropdown_categories( $dropdown_args );
+						
+						//If they didnt select placeholder just output the dropdown now
 						if(!$dropdown_behaviour || $dropdown_behaviour == 'show_all_option'){
 							echo $filterdropdown;
 						}else{
 							
+							//They selected placeholder so now we need to choose what to display and then alter the dropdown before output.
+							$new_label = apply_filters( 'beautiful_filters_dropdown_placeholder', __('All ', 'beautiful-taxonomy-filters') . $taxonomy->labels->name, $taxonomy->name );
 							$filterdropdown = str_replace("value='0' selected='selected'", "", $filterdropdown);
-							echo str_replace('<select ', '<select data-placeholder="' . __('All ', 'beautiful-taxonomy-filters') . $taxonomy->labels->name . '"', $filterdropdown);
+							echo str_replace('<select ', '<select data-placeholder="' . $new_label . '"', $filterdropdown);
 						}
 						
 						?>
