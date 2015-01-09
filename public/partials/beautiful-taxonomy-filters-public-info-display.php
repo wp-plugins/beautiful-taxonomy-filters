@@ -87,7 +87,16 @@ if(!$current_post_type || !in_array($current_post_type, $activated_post_types)){
 		
 		<?php
 		//Get the taxonomies of the current post type and the excluded taxonomies
-		$posttype_taxonomies = apply_filters( 'beautiful_filters_taxonomies', get_option('beautiful_taxonomy_filters_taxonomies') ); 
+		$posttype_taxonomies = apply_filters( 'beautiful_filters_taxonomies', get_option('beautiful_taxonomy_filters_taxonomies') );
+		if(is_array($posttype_taxonomies)){
+			array_push($posttype_taxonomies, 'category', 'post_tag', 'post_format');
+		}else{
+			$posttype_taxonomies = array(
+				'category',
+				'post_tag',
+				'post_format'
+			);
+		}
 		$current_taxonomies = get_object_taxonomies($current_post_type, 'objects');
 		//If we both have taxonomies on the post type AND we've set som excluded taxonomies in the plugins settings. Loop through them and unset those we don't want!
 		if($current_taxonomies && $posttype_taxonomies){
