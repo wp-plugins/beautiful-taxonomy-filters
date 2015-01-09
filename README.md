@@ -3,7 +3,7 @@ Contributors: Jonathandejong, tigerton
 Tags: Taxonomy, taxonomies, filter, filtering, permalinks, terms, term, widget, pretty permalinks, rewrite, custom posttype, cpt, beautiful, select2, dropdowns, material design, GET
 Requires at least: 3.0.1
 Tested up to: 4.1
-Stable tag: 1.1.4.1
+Stable tag: 1.1.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,9 @@ function template_redirect_cb() {
 
 
 == Changelog ==
+
+= 1.1.4.2 =
+* FIX: Hotfix #3. Added fix for widgets regarding core taxonomies.
 
 = 1.1.4.1 = 
 * FIX: Hotfix #2.. Some files got lost in version 1.1.4 and we had to help them find their way back. 
