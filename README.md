@@ -3,7 +3,7 @@ Contributors: Jonathandejong, tigerton
 Tags: Taxonomy, taxonomies, filter, filtering, permalinks, terms, term, widget, pretty permalinks, rewrite, custom posttype, cpt, beautiful, select2, dropdowns, material design, GET
 Requires at least: 3.0.1
 Tested up to: 4.1
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,9 @@ function template_redirect_cb() {
 
 
 == Changelog ==
+
+= 1.1.4 =
+* FIX: This update is a hotfix for an issue where WordPress builtin categories and tags connected to a CPT appear in the filter module. Since they cannot be supported at this time they should not appear at all. This update fixes that. Thanks to BlantantWeb for the notice. 
 
 = 1.1.3 = 
 * FEATURE: The filterinfo module now has the ability to show how many posts a filter has resulted in. There is also new filters for hooking into this. 

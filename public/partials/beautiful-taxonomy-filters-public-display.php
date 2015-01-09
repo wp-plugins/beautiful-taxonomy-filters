@@ -41,6 +41,17 @@ $dropdown_behaviour = apply_filters( 'beautiful_filters_dropdown_behaviour', get
 
 //Get the taxonomies of the current post type and the excluded taxonomies
 $excluded_taxonomies = apply_filters( 'beautiful_filters_taxonomies', get_option('beautiful_taxonomy_filters_taxonomies') ); 
+//Also make sure we don't try to output the builtin taxonomies since they cannot be supported
+if(is_array($excluded_taxonomies)){
+	array_push($excluded_taxonomies, 'category', 'post_tag', 'post_format');
+}else{
+	$excluded_taxonomies = array(
+		'category',
+		'post_tag',
+		'post_format'
+	);
+}
+
 $current_taxonomies = get_object_taxonomies($current_post_type, 'objects');
 //If we both have taxonomies on the post type AND we've set som excluded taxonomies in the plugins settings. Loop through them and unset those we don't want!
 if($current_taxonomies && $excluded_taxonomies){
@@ -50,6 +61,7 @@ if($current_taxonomies && $excluded_taxonomies){
 		}
 	}
 }
+
 ?>
 <div class="beautiful-taxonomy-filters" id="beautiful-taxonomy-filters-<?php echo $current_post_type_rewrite; ?>">
 	<?php do_action( 'beautiful_actions_before_form', $current_post_type); //Allow custom markup before form ?>
