@@ -112,7 +112,7 @@ class Beautiful_Taxonomy_Filters_Info_Widget extends WP_Widget {
 				//If we both have taxonomies on the post type AND we've set som excluded taxonomies in the plugins settings. Loop through them and unset those we don't want!
 				if($current_taxonomies && $excluded_taxonomies){
 					foreach($current_taxonomies as $key => $value){
-						if(in_array($key, $excluded_taxonomies)){
+						if(in_array($value['taxonomy'], $excluded_taxonomies)){
 							unset($current_taxonomies[$key]);
 						}
 					}

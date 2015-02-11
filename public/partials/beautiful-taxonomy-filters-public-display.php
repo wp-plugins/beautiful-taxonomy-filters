@@ -81,6 +81,7 @@ if($current_taxonomies && $excluded_taxonomies){
 		$count = count($current_taxonomies);	
 		?>
 		<div class="beautiful-taxonomy-filters-select-wrap clearfix">
+			<?php do_action( 'beautiful_actions_beginning_form_inner', $current_post_type); //allow custom markup at beginning of form ?>
 			<?php foreach($current_taxonomies as $key => $taxonomy): ?>
 				<?php $terms = get_terms($key); ?>
 				<?php if(!empty($terms) && !is_wp_error($terms)): ?>
@@ -130,7 +131,9 @@ if($current_taxonomies && $excluded_taxonomies){
 					</div>
 				<?php endif; ?>
 			<?php endforeach; ?>
+			<?php do_action( 'beautiful_actions_ending_form_inner', $current_post_type); //allow custom markup at end of inner form ?>
 		</div>
+		<?php do_action( 'beautiful_actions_before_submit_button', $current_post_type); //allow custom markup before submit button ?>
 		<button type="submit" class="beautiful-taxonomy-filters-button"><?php echo apply_filters( 'beautiful_filters_apply_button', __('Apply filter', 'beautiful-taxonomy-filters') ); ?></button>
 		<?php if($show_clear_all): ?>
 			<a href="<?php echo get_post_type_archive_link($current_post_type); ?>" class="beautiful-taxonomy-filters-clear-all" title="<?php _e('Click to clear all active filters', 'beautiful-taxonomy-filters'); ?>"><?php _e('Clear all', 'beautiful-taxonomy-filters'); ?></a>

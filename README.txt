@@ -3,7 +3,7 @@ Contributors: Jonathandejong, tigerton
 Tags: Taxonomy, taxonomies, filter, filtering, pretty permalinks, terms, term, widget, pretty permalinks, rewrite, custom posttype, cpt, beautiful, select2, dropdowns, material design, GET, multisite compatible, polylang compatible, select filter
 Requires at least: 3.0.1
 Tested up to: 4.1
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -93,6 +93,8 @@ Just start tagging up your posts and you’ll see it shows up! Also, make sure t
 = Is it compatible with Polylang/WPML?
 It is currently only compatible with Polylang but support for WPML is coming. We've not been able to test every single setting in polylang so bear with us if there are a few bugs to work out (feedback is much appreciated). In order for this to work properly you should set the post types and all connected taxonomies to be translatable. The filtered urls will still work even if you don't set the posttype to be translatable but when switching language Polylang still think it should add the new language to the URL which means it'll throw a 404 error. This is to be expected and NOT due to this plugin. If you experience 404 errors make sure you flush your rewrite rules by going to settings > permalinks in the admin dashboard. 
 
+Note that it will still work on a site using WPML, it just doesn't have the support for translated taxonomies etc. 
+
 = Is it compatible with XXXXXX? =
 You will be able to use this plugin with any **public registered custom post type** regardless if it's been created by yourself or a plugin. **However** the displaying of the CPT must be via it's archive template. That means that a plugin that uses shortcodes to display the entire post listing on a static page will not work out of the box. It will also not work out of the box with plugins that in some way alter the permalink to the CPT archive [WPMU Devs Events+ for example](https://premium.wpmudev.org/project/events-plus/).
 
@@ -139,6 +141,12 @@ function template_redirect_cb() {
 
 
 == Changelog ==
+
+= 1.2.1 = 
+* IMPROVEMENT: Added multiple new actions for even better control of the filter module and give you the ability to modify the template_redirect filter. Check "other notes" for more. 
+* IMPROVEMENT: Added a filter to be able to manipulate the new URL a visitor is sent to when filtering
+* IMPROVEMENT: Improved the way the filterinfo module determines current taxonomies.
+* FIX: Fixed an issue where current taxonomies didn't get displayed properly in the filterinfo module.
 
 = 1.2 =
 * FEATURE: the `show_beautiful_filters()` function can now take a parameter of a custom post type name. Doing so enables you to show the filter module anywhere in your theme for a specific post type. Much like the widget except you can place the function pretty much anywhere without having to use a widget. Pretty sweet.
@@ -457,6 +465,19 @@ function modify_filterinfo_postcount($postcount_paragraph){
 add_filter('beautiful_filters_info_postcount', 'modify_filterinfo_postcount');
 `
 
+= beautiful_filters_new_url =
+
+$posttype is the current posttype. Use this filter to manipulate the URL string of the filtered archive page that the visitor will be directed to.
+
+`
+function modify_new_url($url){
+	
+	return $url . '?filtered=yes';
+	
+}
+add_filter('beautiful_filters_new_url', 'modify_new_url');
+`
+
 
 = **Actions** =
 These are the actions you may use to extend the filter component.
@@ -514,6 +535,49 @@ function add_markup_ending_form($current_post_type){
 
 add_action('beautiful_actions_ending_form', 'add_markup_ending_form' );
 `
+
+= beautiful_actions_beginning_form_inner =
+
+$current_post_type is the post type which the filter component are currently using. Use this variable as a conditional if needed.
+This action can be used to add inputs etc to the beginning of the inner div of the filter module.
+
+`
+function add_markup_beginning_form_inner($current_post_type){
+	
+	echo 'Hej världen';
+}
+
+add_action('beautiful_actions_beginning_form_inner', 'add_markup_beginning_form_inner' );
+`
+
+= beautiful_actions_ending_form_inner =
+
+$current_post_type is the post type which the filter component are currently using. Use this variable as a conditional if needed.
+This action can be used to add inputs etc to the end of the inner div of the filter module.
+
+`
+function add_markup_ending_form_inner($current_post_type){
+	
+	echo 'Hej världen';
+}
+
+add_action('beautiful_actions_ending_form_inner', 'add_markup_ending_form_inner' );
+`
+
+= beautiful_actions_before_redirection =
+
+$current_post_type is the post type which the filter component are currently using. Use this variable as a conditional if needed.
+This action can be used to add your own stuff or manipulate something before the page is redirected to the new filtered page but after the page has reloaded.
+
+`
+function custom_stuff_before_redirection($current_post_type){
+	
+	echo 'Hej världen';
+}
+
+add_action('beautiful_actions_before_redirection', 'custom_stuff_before_redirection' );
+`
+
 
 = beautiful_actions_beginning_filterinfo =
 

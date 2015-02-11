@@ -250,10 +250,14 @@ class Beautiful_Taxonomy_Filters_Public {
 			}
 		}
 		
+		//Perform actions before the redirect to the filtered page
+		do_action( 'beautiful_actions_before_redirection', $current_post_type);
+		
+		//keep GET parameters
 		$new_url = $this->append_get_parameters($new_url);
 		
 		//perform a redirect to the new filtered url
-		wp_redirect($new_url);
+		wp_redirect(apply_filters( 'beautiful_filters_new_url', $new_url, $current_post_type ));
 		exit;
 	}
 	
