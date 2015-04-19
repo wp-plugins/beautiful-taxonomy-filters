@@ -3,8 +3,8 @@ Contributors: Jonathandejong, tigerton
 Donate link: http://fancy.to/k9qxt
 Tags: Taxonomy, taxonomies, filter, filtering, pretty permalinks, terms, term, widget, pretty permalinks, rewrite, custom posttype, cpt, beautiful, select2, dropdowns, material design, GET, multisite compatible, polylang compatible, select filter, SEO friendly
 Requires at least: 3.0.1
-Tested up to: 4.1
-Stable tag: 1.2.3
+Tested up to: 4.2
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,7 @@ The Beautiful Taxonomy Filters plugin is an easy and good-looking way to provide
 * Spanish (Thanks to Juan Javier Moreno Restituto)
 * Dutch (Thanks to Piet Bos)
 * French (Thanks to [Brice Capobianco](https://profiles.wordpress.org/brikou))
+* Simplified Chinese (Thanks to [Amos Lee](http://www.wpzhiku.com/))
 ____
 Do you want to translate this plugin to another language? I recommend using POEdit (http://poedit.net/) or if you prefer to do it straight from the WordPress admin interface (https://wordpress.org/plugins/loco-translate/). When you’re done, send us the file(s) to jonathan@tigerton.se and we’ll add it to the official plugin!
 
@@ -149,6 +150,16 @@ Why thank you! We don't have proper donate link but if you want to you can send 
 
 
 == Changelog ==
+
+= 1.2.4 =
+* Tested on WordPress 4.2
+* IMPROVEMENT: Added Simplified Chinese translation. Thanks to [Amos Lee](http://www.wpzhiku.com/).
+* IMPROVEMENT: Added the ability to sort the taxonomies by filter. No need to re-register them in the "right" order. Thanks to [mranner](https://wordpress.org/support/profile/mranner).
+* IMPROVEMENT: Updated the Select2 library (RC2). Fixes usability on devices amongst other things.
+* IMPROVEMENT: Added a setting to select2 which only applies the search-field in the dropdown if there's more than 8 results. This can be modified with a new filter which you can read about under [Other notes](https://wordpress.org/plugins/beautiful-taxonomy-filters/other_notes/).
+* IMPROVEMENT: Added localization for all select2 parameters and created new filters for modifying those. 
+
+A new resource for information about how to use BTF and it's filters will soon emerge from the mist…
 
 = 1.2.3 = 
 * IMPROVEMENT: Added some basic media query styling to the style themes to avoid extremely small dropdowns on those modern electric things people carry around (smartphones). 
@@ -289,6 +300,23 @@ function modify_categories_dropdown( $taxonomies ) {
 add_filter( 'beautiful_filters_taxonomies', 'modify_categories_dropdown', 10, 1 );
 `
 
+= beautiful_filters_taxonomy_order =
+
+$taxonomies is an array of the taxonomies slugs. $current_post_type is the post type we're using the filter on. This must return the $taxonomies array.
+
+`
+function moveElement(&$array, $a, $b) {
+    $out = array_splice($array, $a, 1);
+    array_splice($array, $b, 0, $out);
+}
+
+function custom_tax_ordering($taxonomies, $current_post_type){
+	moveElement($taxonomies, 2, 0);
+	return $taxonomies;
+}
+add_filter('beautiful_filters_taxonomy_order', 'custom_tax_ordering');
+`
+
 = beautiful_filters_dropdown_placeholder =
 
 $placeholder is the string used for the placeholder. 
@@ -406,20 +434,6 @@ function modify_filter_button($string){
 add_filter('beautiful_filters_apply_button', 'modify_filter_button', 10, 1);
 `
 
-= beautiful_filters_active_taxonomy =
-
-$label is the taxonomy string for the active filter info
-$taxonomy is the current taxonomy name
-
-`
-function modify_active_taxonomy($label, $taxonomy){
-	
-	return $label;
-}
-
-add_filter('beautiful_filters_taxonomy_label', 'modify_active_taxonomy', 10, 2);
-`
-
 = beautiful_filters_active_terms =
 
 $terms is the terms string for the active filter info
@@ -490,7 +504,7 @@ add_filter('beautiful_filters_info_postcount', 'modify_filterinfo_postcount');
 
 = beautiful_filters_new_url =
 
-$posttype is the current posttype. Use this filter to manipulate the URL string of the filtered archive page that the visitor will be directed to.
+Use this filter to manipulate the URL string of the filtered archive page that the visitor will be directed to.
 
 `
 function modify_new_url($url){
@@ -499,6 +513,34 @@ function modify_new_url($url){
 	
 }
 add_filter('beautiful_filters_new_url', 'modify_new_url');
+`
+
+= beautiful_filters_selec2_minsearch =
+
+$min_search is an integer.
+
+`
+function change_minsearch_value($min_search){
+	
+	//always show search
+	return 1;
+	
+}
+add_filter('beautiful_filters_selec2_minsearch', 'change_minsearch_value');
+`
+
+= beautiful_filters_selec2_allowclear =
+
+$bool is a boolean value of either true of false. Setting this to false disables the ability to remove the selection with the x-icon.
+
+`
+function change_allowclear_value($bool){
+	
+	//Disables the allow clear.
+	return false;
+	
+}
+add_filter('beautiful_filters_selec2_allowclear', 'change_allowclear_value');
 `
 
 
