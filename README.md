@@ -4,7 +4,7 @@ Donate link: http://fancy.to/k9qxt
 Tags: Taxonomy, taxonomies, filter, filtering, pretty permalinks, terms, term, widget, pretty permalinks, rewrite, custom posttype, cpt, beautiful, select2, dropdowns, material design, GET, multisite compatible, polylang compatible, select filter, SEO friendly
 Requires at least: 3.0.1
 Tested up to: 4.2
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -150,6 +150,10 @@ Why thank you! We don't have proper donate link but if you want to you can send 
 
 
 == Changelog ==
+
+= 1.2.5 = 
+* IMPROVEMENT: Added filter for the term names in the dropdowns. Add your own indentation indicators or just mess about with the term names. Go bananas!
+* IMPROVEMENT: Since security is fashionable we've added Nonce security to the form. Try to hack us now!
 
 = 1.2.4 =
 * Tested on WordPress 4.2
@@ -406,6 +410,30 @@ function modify_dropdown_behaviour( $behaviour, $current_post_type) {
     return $orderby;
 }
 add_filter( 'beautiful_filters_dropdown_behaviour', 'modify_dropdown_behaviour', 10, 2 );
+`
+
+= beautiful_filters_dropdown_behaviour =
+
+$term_name is a string that have to be returned. $category is the term object. $depth is the level of depth for the current term starting at 0 (no parent).
+Use this to alter the output of the term name inside the dropdowns.
+
+`
+//Add visual information when a terms are children/grandchildren etc.
+add_filter('beautiful_filters_term_name', 'custom_term_name', 10, 3);
+function custom_term_name($term_name, $category, $depth){
+	
+	//We have indentation
+	if($depth !== 0){
+		$indent = '';
+		//Add one – for each step down the hierarchy, like WP does in admin.
+		for($i = 0; $i < $depth; $i++){
+			$indent .= '–'; 
+		}
+		return $indent . ' ' . $term_name;	
+	}
+	return $term_name;
+	
+}
 `
 
 = beautiful_filters_taxonomy_label =
@@ -671,4 +699,3 @@ function add_markup_ending_filterinfo($current_post_type){
 
 add_action('beautiful_actions_ending_filterinfo', 'add_markup_ending_filterinfo' );
 `
-

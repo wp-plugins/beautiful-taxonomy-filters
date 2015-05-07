@@ -175,6 +175,12 @@ class Beautiful_Taxonomy_Filters_Public {
 	* @since 1.0.0
 	*/
 	public function catch_filter_values(){
+		
+		//Nope, this pageload was not due to our filter!
+		if ( !isset($_POST['btf_do_filtering_nonce']) || !wp_verify_nonce( $_POST['btf_do_filtering_nonce'], "Beutiful-taxonomy-filters-do-filter")) 
+			return;
+
+		
 		//If we don't have an url, this wont work!
 		$referer = (isset($_POST['site-url']) ? $_POST['site-url'] : false);
 		if(!$referer)
