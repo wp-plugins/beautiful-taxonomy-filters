@@ -96,7 +96,7 @@ Just start tagging up your posts and you’ll see it shows up! Also, make sure t
 = The filter isn't working with my taxonomies using a rewrite slug =
 In order for the rewrite rules to work with a taxonomy that has a rewrite slug you also have to add the same slug to the `query_var` parameter of register_taxonomy. It wont have any visible impact for you but it's what's needed for the filtered urls to work!
 
-= Is it compatible with Polylang/WPML?
+= Is it compatible with Polylang/WPML? =
 It is currently only compatible with Polylang but support for WPML is coming. We've not been able to test every single setting in polylang so bear with us if there are a few bugs to work out (feedback is much appreciated). In order for this to work properly you should set the post types and all connected taxonomies to be translatable. The filtered urls will still work even if you don't set the posttype to be translatable but when switching language Polylang still think it should add the new language to the URL which means it'll throw a 404 error. This is to be expected and NOT due to this plugin. If you experience 404 errors make sure you flush your rewrite rules by going to settings > permalinks in the admin dashboard.
 
 Note that it will still work on a site using WPML, it just doesn't have the support for translated taxonomies etc.
