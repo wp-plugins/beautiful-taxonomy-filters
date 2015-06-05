@@ -118,22 +118,22 @@ class Beautiful_Taxonomy_Filters {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-beautiful-taxonomy-filters-public.php';
-		
+
 		/**
 		 * The class responsible for running the wp rewrite rules
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-beautiful-taxonomy-filters-rewrite-rules.php';
-		
+
 		/**
 		 * The class that contains our custom wp_get_categories walker
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-beautiful-taxonomy-filters-walker.php';
-		
+
 		/**
 		 * Our widget class
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'widgets/beautiful-taxonomy-filters-widget.php';
-		
+
 		/**
 		 * Our info widget class
 		 */
@@ -176,7 +176,7 @@ class Beautiful_Taxonomy_Filters {
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_menu' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'settings_api_init' );
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'register_widgets' );
-		
+
 	}
 
 	/**
@@ -195,8 +195,10 @@ class Beautiful_Taxonomy_Filters {
 		$this->loader->add_action( 'wp_head', $plugin_public, 'custom_css' );
 		$this->loader->add_action( 'loop_start', $plugin_public, 'automagic_insertion' ); //sounds dirty...
 		$this->loader->add_filter( 'template_redirect', $plugin_public, 'catch_filter_values' );
-		
-		
+		//Our own custom actions to let users insert our code into their themes in a friendly way
+		$this->loader->add_action( 'show_beautiful_filters', $plugin_public, 'beautiful_filters', 10, 1 );
+		$this->loader->add_action( 'show_beautiful_filters_info', $plugin_public, 'beautiful_filters_info' );
+
 
 	}
 
