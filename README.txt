@@ -4,7 +4,7 @@ Donate link: http://fancy.to/k9qxt
 Tags: Taxonomy, taxonomies, filter, filtering, pretty permalinks, terms, term, widget, pretty permalinks, rewrite, custom posttype, cpt, beautiful, select2, dropdowns, material design, GET, multisite compatible, polylang compatible, select filter, SEO friendly
 Requires at least: 3.0.1
 Tested up to: 4.2
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -150,6 +150,12 @@ Why thank you! We don't have proper donate link but if you want to you can send 
 
 
 == Changelog ==
+
+= 1.2.7 =
+* IMPROVEMENT: Added the same filter for modifying the "Apply filter" button text for the widget as the other implementations. If you're already using the filter you should see the change to the widget without any further actions.
+* IMPROVEMENT: Added filter for changing the "Clear all" button text. Use `beautiful_filters_clear_button`. Takes the string and requires a return of a string.
+
+Now go punch a shark!
 
 = 1.2.6 =
 * FEATURE: It's now easier than ever to add the modules to your themes. Instead of using `<?php if(function_exists('show_beautiful_filters')){ show_beautiful_filters(); } ?>` you can now just do `<?php do_action('show_beautiful_filters'); ?>` and of course `<?php do_action('show_beautiful_filters_info'); ?>` for the info module. This means less code, cleaner look and you wont see a white screen of death if you've failed to do a function_exists call and disabled the plugin. **NOTE:** The old way will still work so don't worry.. you don't have to do anything if you don't want to… [More info](http://nacin.com/2010/05/18/rethinking-template-tags-in-plugins/).
@@ -465,6 +471,19 @@ function modify_filter_button($string){
 }
 
 add_filter('beautiful_filters_apply_button', 'modify_filter_button', 10, 1);
+`
+
+= beautiful_filters_clear_button =
+
+$string is the default string of the apply filters button.
+
+`
+function modify_clear_button($string){
+
+	return 'Hej världen';
+}
+
+add_filter('beautiful_filters_clear_button', 'modify_clear_button', 10, 1);
 `
 
 = beautiful_filters_active_terms =
